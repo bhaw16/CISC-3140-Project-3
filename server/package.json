@@ -4,6 +4,7 @@
   "description": "first socket.io app",
   "type": "commonjs",
   "dependencies": {
+    "content-type": "^1.0.5",
     "express": "^4.19.2",
     "socket.io": "^4.7.5"
   }
