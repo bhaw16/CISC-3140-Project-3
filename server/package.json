@@ -1,5 +1,10 @@
 {
+  "name": "socket-chat-app",
+  "version": "0.0.1",
+  "description": "first socket.io app",
+  "type": "commonjs",
   "dependencies": {
+    "express": "^4.19.2",
     "socket.io": "^4.7.5"
   }
 }
