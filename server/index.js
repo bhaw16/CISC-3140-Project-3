@@ -1,26 +1,45 @@
 var express = require("express");
+var router = express.Router();
 var app = express();
 var http = require("http");
-var server = http.createServer(app);
-var { join } = require("node:path");
+var server = http.createServer(app, (req, res) => {
+    res.setHeader("Content Type", "application/javascript");
+});
+//var { join } = require("node:path");
 var { Server } = require("socket.io");  //Server module
 var io = new Server(server);
 var path = require("path");
-path.basename("/Users/briannahawkins/Desktop/cisc-3140-project-3/");
+var pathString;
+//path.basename("/Users/briannahawkins/Desktop/cisc-3140-project-3/client");
 
+app.use = (req, res, next) => {
+    //console.log(req.method);
+    next = () => {
+        pathString = `${__dirname.substring(0, __dirname.indexOf("server"))}${"client/index.html"}`;
+        console.log(pathString);
+    };
+    next();
+}
+
+app.use(express.static("js"));
+app.use('/', express.static(path.join(pathString)));
+
+//"index.html", {root: "/Users/briannahawkins/Desktop/cisc-3140-project-3/client/"}
 app.get('/', (req, res) => {
-    res.sendFile(app.use(express.static(path.join(__dirname, "client")), "index.html"), (err) => {
+    res.sendFile(path.join(pathString)), (err) => {
         if (err) {
-            res.writeHead(404, "Content Type: text/html");
-            return res.end("404 Not Found");
+            console.log("Error sending HTML file.");
         }
-    });
+        else {
+            console.log("It's working! :)");
+        }
+    }
 });
 
 io.on("connection", (socket) => {
-    console.log(`A user connected at ${new Date().toLocaleTimeString}.`);
+    console.log(`A user connected at ${new Date().toLocaleTimeString()}.`);
     socket.on("disconnect", () => {
-        console.log(`A user disconnected at ${new Date().toLocaleTimeString}.`);
+        console.log(`A user disconnected at ${new Date().toLocaleTimeString()}.`);
     })
 })
 
@@ -28,4 +47,4 @@ server.listen(3000, () => {
     console.log("server listening on port 3000");
 });
 module.exports = app;
-return this.router;
+module.exports = router;
