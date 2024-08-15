@@ -4,13 +4,15 @@
         <title>
             Real-time Chat Application
         </title>
+        <base href="/">
     </head>
     <body>
-        <script src="script.js"></script>
         <h1>Real-time Chat Application</h1>
-        <form method="get">
+        <form method="get" action="../server/index.js">
             <input type="textarea" name="message" required>
             <input type="submit" value="Send" name="submit">
         </form>
+        <script src="/Users/briannahawkins/Desktop/cisc-3140-project-3/client/script.js"></script>
+        <!--<script src="/socket.io/socket.io.js"></script>-->
     </body>
 </html>
